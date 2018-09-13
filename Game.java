@@ -39,13 +39,13 @@ public class Game extends Canvas implements Runnable {
 
 		r = new Random();
 		
-		player = new Player(WIDTH / 2, HEIGHT / 2, 50, 50, ID.Player, 5, handler);
+		player = new Player(WIDTH / 2, HEIGHT / 2, 50, 50, ID.Player, 5, Color.red, handler);
 		
 		screenPosition = new ScreenPosition((new Point(WIDTH / 2, HEIGHT / 2)), player, 220);
 
 		handler.addObject(player);
-		handler.addObject(new NPC(100, 100, 30, 30, ID.NPC, 7, Color.blue, handler));
-		handler.addObject(new NPC(450, 200, 60, 60, ID.NPC, 3, Color.green, handler));
+		handler.addObject(new Human(100, 100, 30, 30, ID.NPC, 7, Color.blue, handler));
+		handler.addObject(new Human(450, 200, 60, 60, ID.NPC, 3, Color.green, handler));
 	}
 
 	public synchronized void start() {
@@ -86,7 +86,9 @@ public class Game extends Canvas implements Runnable {
 
 			if (System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
-				System.out.println("FPS: " + frames);
+				//System.out.println("FPS: " + frames);
+				//System.out.println("player: " + player.getX() + ", " + player.getY());
+				//System.out.println("npc: " + handler.object.get(1).getVelX() + ", " + handler.object.get(1).getVelY());
 				frames = 0;
 
 			}
@@ -122,24 +124,6 @@ public class Game extends Canvas implements Runnable {
 		g.dispose();
 		bs.show();
 
-	}
-
-	public static int clamp(int var, int min, int max) {
-		if (var >= max)
-			return var = max;
-		if (var <= min)
-			return var = min;
-		else
-			return var;
-	}
-	
-	public static double distance(GameObject obj1, GameObject obj2) {
-		int dX = obj2.getX() - obj1.getX();
-		int dY = obj2.getY() - obj1.getY();
-		
-		double distance = Math.sqrt((dX * dX) + (dY * dY));
-		
-		return distance;
 	}
 
 	public static void main(String args[]) {

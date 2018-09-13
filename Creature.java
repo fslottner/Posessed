@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class Creature extends GameObject {
@@ -12,8 +13,10 @@ public abstract class Creature extends GameObject {
 	protected Handler handler;
 	protected Color color;
 	protected int speed;
+	
+	protected ArrayList<Ability> abilities = new ArrayList<Ability>();
 
-	public Creature(int x, int y, int sizeX, int sizeY, ID id, int speed, Color color, Handler Handler) {
+	public Creature(int x, int y, int sizeX, int sizeY, ID id, int speed, Color color, Handler handler) {
 		super(x, y, sizeX, sizeY, id);
 		this.speed = speed;
 		this.color = color;
@@ -61,6 +64,13 @@ public abstract class Creature extends GameObject {
 		return speed;
 	}
 	
-	protected abstract void Brain();
+	@Override
+	public void tick() {
+		
+		velX = Library.clamp(velX, -speed, speed);
+		velY = Library.clamp(velY, -speed, speed);
+		
+		super.tick();
+	}
 	
 }

@@ -18,10 +18,6 @@ public abstract class GameObject {
 		this.id = id;
 	}
 	
-	public abstract void tick();
-	public abstract void render(Point sc, Graphics g);
-	public abstract Rectangle getBounds();
-	
 	public void setX(int x) {
 		this. x = x;
 	}
@@ -70,6 +66,14 @@ public abstract class GameObject {
 		return sizeY; 
 	}
 	
+	protected void tick() {
+		x += velX;
+		y += velY;
+	}
+	
+	//public abstract void tick();
+	public abstract void render(Point sc, Graphics g);
+	public abstract Rectangle getBounds();
 	
 
 }

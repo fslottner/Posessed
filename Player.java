@@ -6,57 +6,14 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.Random;
 
-public class Player extends GameObject {
+public class Player extends Creature{
 	
-	private Random r = new Random();
-	private Handler handler;
-	private int speed;
 	private NPC npc = null;
 	
-	public Player(int x, int y, int sizeX, int sizeY, ID id, int speed, Handler handler) {
-		super(x, y, sizeX, sizeY, id);
+	public Player(int x, int y, int sizeX, int sizeY, ID id, int speed, Color color, Handler handler) {
+		super(x, y, sizeX, sizeY, id, speed, color, handler);
 		this.handler = handler;
 		this.speed = speed;
-	}
-	
-	public void startMoveUp() {
-		velY -= 5;
-	}
-	
-	public void stopMoveUp() {
-		velY += 5;
-	}
-
-	public void startMoveDown() {
-		velY += 5;
-	}
-	
-	public void stopMoveDown() {
-		velY -= 5;
-	}
-
-	public void startMoveLeft() {
-		velX -= 5;
-	}
-	
-	public void stopMoveLeft() {
-		velX += 5;
-	}
-
-	public void startMoveRight() {
-		velX += 5;
-	}
-	
-	public void stopMoveRight() {
-		velX -= 5;
-	}
-	
-	public void setSpeed(int speed) {
-		this.speed =speed;
-	}
-	
-	public int getSpeed() {
-		return speed;
 	}
 	
 	public void setNPC(NPC npc) {
@@ -67,14 +24,109 @@ public class Player extends GameObject {
 		return npc;
 	}
 	
+	@Override
+	public void startMoveUp() {
+		if (npc == null) {
+			super.startMoveUp();
+		} else {
+			npc.startMoveUp();
+		}
+		
+	}
+
+	@Override
+	public void startMoveDown() {
+		if (npc == null) {
+			super.startMoveDown();
+		} else {
+			npc.startMoveDown();
+		}
+		
+	}
+
+	@Override
+	public void startMoveLeft() {
+		if (npc == null) {
+			super.startMoveLeft();
+		} else {
+			npc.startMoveLeft();
+		}
+		
+	}
+
+	@Override
+	public void startMoveRight() {
+		if (npc == null) {
+			super.startMoveRight();
+		} else {
+			npc.startMoveRight();
+		}
+		
+	}
+
+	@Override
+	public void stopMoveUp() {
+		if (npc == null) {
+			super.stopMoveUp();
+		} else {
+			npc.stopMoveUp();
+		}
+		
+	}
+
+	@Override
+	public void stopMoveDown() {
+		if (npc == null) {
+			super.stopMoveDown();
+		} else {
+			npc.stopMoveDown();
+		}
+		
+	}
+
+	@Override
+	public void stopMoveLeft() {
+		if (npc == null) {
+			super.stopMoveLeft();
+		} else {
+			npc.stopMoveLeft();
+		}
+		
+	}
+
+	@Override
+	public void stopMoveRight() {
+		if (npc == null) {
+			super.stopMoveRight();
+		} else {
+			npc.stopMoveRight();
+		}
+		
+	}
+	
+	public void posess(NPC npc) {
+		
+		velX = 0;
+		velY = 0;
+		x = npc.getX();
+		y = npc.getY();
+		this.npc = npc;
+
+		npc.setUseBrainF();
+	}
+	
+	public void unposess() {
+		npc = null;
+	}
+	
 	public void tick() {
-		x += velX;
-		y += velY;
 		
 		if (npc != null) {
 			x = npc.getX();
 			y = npc.getY();
 		}
+		
+		super.tick();
 		
 		collision();
 	}

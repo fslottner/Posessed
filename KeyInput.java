@@ -24,26 +24,27 @@ public class KeyInput extends KeyAdapter {
 
 				switch (key) {
 				case KeyEvent.VK_UP:
-					//tempObject.setVelY(tempObject.getVelY() - 5);
 					p.startMoveUp();
 					break;
 				case KeyEvent.VK_DOWN:
-					//tempObject.setVelY(tempObject.getVelY() + 5);
 					p.startMoveDown();
 					break;
 				case KeyEvent.VK_LEFT:
-					//tempObject.setVelX(tempObject.getVelX() - 5);
 					p.startMoveLeft();
+					System.out.println("left pressed");
 					break;
 				case KeyEvent.VK_RIGHT:
-					//tempObject.setVelX(tempObject.getVelX() + 5);
 					p.startMoveRight();
 					break;
+				case KeyEvent.VK_SPACE:
+					if (p.getNPC() == null) {
+						p.posess((NPC) handler.object.get(1)); 
+					}
 				}
 
-				tempObject.setVelY(Game.clamp(tempObject.getVelY(), -5, 5));
+				tempObject.setVelY(Library.clamp(tempObject.getVelY(), -5, 5));
 
-				tempObject.setVelX(Game.clamp(tempObject.getVelX(), -5, 5));
+				tempObject.setVelX(Library.clamp(tempObject.getVelX(), -5, 5));
 
 			}
 
@@ -67,26 +68,23 @@ public class KeyInput extends KeyAdapter {
 				
 				switch (key) {
 				case KeyEvent.VK_UP:
-					//tempObject.setVelY(tempObject.getVelY() + 5);
 					p.stopMoveUp();
 					break;
 				case KeyEvent.VK_DOWN:
-					//tempObject.setVelY(tempObject.getVelY() - 5);
 					p.stopMoveDown();
 					break;
 				case KeyEvent.VK_LEFT:
-					//tempObject.setVelX(tempObject.getVelX() + 5);
 					p.stopMoveLeft();
+					System.out.println("left key released");
 					break;
 				case KeyEvent.VK_RIGHT:
-					//tempObject.setVelX(tempObject.getVelX() - 5);
 					p.stopMoveRight();
 					break;
 				}
 
-				tempObject.setVelY(Game.clamp(tempObject.getVelY(), -5, 5));
+				tempObject.setVelY(Library.clamp(tempObject.getVelY(), -5, 5));
 
-				tempObject.setVelX(Game.clamp(tempObject.getVelX(), -5, 5));
+				tempObject.setVelX(Library.clamp(tempObject.getVelX(), -5, 5));
 
 			}
 
